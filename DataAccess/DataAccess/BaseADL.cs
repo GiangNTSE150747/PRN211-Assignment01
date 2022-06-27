@@ -17,13 +17,16 @@ namespace DataAccess.DataAccess
         static string GetConnectionString()
         {
 
-            IConfiguration config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", true, true).Build();
-            var strConnection = config["ConnectionStrings: FStoreDB"];
-            if (strConnection == null)
-            { System.Console.WriteLine("Null"); }
-            else { System.Console.WriteLine("OK"); }
-
-            return strConnection;
+            //help us to read appsettings.json
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("AppSettings.json")
+                .Build();
+            if (config["ConnectionStrings:FptEduDBConn"] == null)
+            {
+                Console.WriteLine("Null");
+            }
+            return config["ConnectionStrings:FptEduDBConn"];
 
         }
 

@@ -67,9 +67,9 @@ namespace DataAccess.DataAccess
             MemberObject member = null;
             try
             {
-                var param = dataProvider.CreateParameter("@CarId", 4, memberID, DbType.Int32);
-                System.Console.WriteLine("aaaaaaaaaaa");
+                var param = dataProvider.CreateParameter("@MemberID", 4, memberID, DbType.Int32);
                 dataReader = dataProvider.GetDataReader(SQLSelect, CommandType.Text, out connection, param);
+                System.Console.WriteLine(connection);
                 while (dataReader.Read())
                 {
                     member = new MemberObject
@@ -134,7 +134,7 @@ namespace DataAccess.DataAccess
                 MemberObject mem = GetMemberByID(member.MemberID);
                 if (mem != null)
                 {
-                    string SQLUpdate = "Update Cars set MemberName = @MemberName, Email = @Email, Password = @Password" +
+                    string SQLUpdate = "Update Members set MemberName = @MemberName, Email = @Email, Password = @Password" +
                         ", City = @City, Country = @Country Where MemberId = @MemberId";
                     var parameters = new List<SqlParameter>();
                     parameters.Add(dataProvider.CreateParameter("@MemberID", 4, mem.MemberID, DbType.Int32));
@@ -147,7 +147,7 @@ namespace DataAccess.DataAccess
                 }
                 else
                 {
-                    throw new Exception("This car does not already exist.");
+                    throw new Exception("This member does not already exist.");
                 }
             }
             catch (Exception ex)
@@ -175,7 +175,7 @@ namespace DataAccess.DataAccess
                 }
                 else
                 {
-                    throw new Exception("This car does not already exist.");
+                    throw new Exception("This Member does not already exist.");
                 }
             }
             catch (Exception ex)

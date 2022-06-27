@@ -5,14 +5,9 @@ namespace DataAccess.DataAccess
 {
     public class StockDataProvider
     {
-        private object connectionString;
-
         public StockDataProvider() { }
 
-        public StockDataProvider(object connectionString)
-        {
-            this.connectionString = connectionString;
-        }
+        public StockDataProvider(string connectionString) => ConnectionString = connectionString;
 
         private string ConnectionString { get; set; }
 
@@ -38,9 +33,7 @@ namespace DataAccess.DataAccess
             try
             {
                 connection = new SqlConnection(ConnectionString);
-                System.Console.WriteLine("aaaaaaaaaaa");
                 connection.Open();
-                System.Console.WriteLine("aaaaaaaaaaa");
                 var command = new SqlCommand(commandText, connection);
                 command.CommandType = commandType;
                 if (parameters != null)
